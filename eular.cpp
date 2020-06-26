@@ -2,12 +2,18 @@
 #include "nstr.h"
 #include <windows.h>
 
+// Allows user to calculate eulars number to large 
+//  decimal precision
+//
+// It is kind of a guessing game for the needed precision
+// One will realize soon it needs to be large to account for dividing by factorials
+
 
 nstr fact(int);
 
 int main() {
 
-    nstr::set_precision(20);
+    nstr::set_precision(60);
     nstr::set_disp_precision(54);
 
     nstr e = "0";
