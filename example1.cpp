@@ -1,6 +1,8 @@
 #include <iostream>
 #include "nstr.h"
 
+// Showing basic examples of calculations
+
 int main() {
 
     nstr::set_precision(30);
