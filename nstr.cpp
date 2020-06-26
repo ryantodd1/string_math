@@ -381,20 +381,7 @@ nstr operator/(const nstr &str0, const nstr &str1) {
     bool negative = false;
     if (str0.neg && !str1.neg) negative = true;
     if (!str0.neg && str1.neg) negative = true;
-
-    int length_str1;
-    if (str1.number.find(".") != std::string::npos)
-        length_str1 = str1.number.find(".");
-    else length_str1 = str1.number.size();
     
-    if (length_str1 > nstr::precision) {
-        std::cout << "\nWarning precision to small to accurately calculate \"";
-        std::cout << str0 << " / " << str1 << "\"\n";
-        std::cout << "Newtons method failure, increase size of precision\n";
-        std::cout << "Recomended \"nstr::set_precision(" << length_str1 + 1 << ")\"\n";
-        std::cout << "For dividing by \"" << str1 << "\"\n\n";
-        exit(-1);
-    }
     std::string temp_x = "0.";
     for (int i = 1; i < nstr::precision - 1; i++)
         temp_x.push_back('0');
@@ -403,9 +390,16 @@ nstr operator/(const nstr &str0, const nstr &str1) {
     nstr x(temp_x);
     nstr temp_str1(str1.number);
     nstr prev_x;
+
     do {
         prev_x = x;
         x = x * ("2" - temp_str1 * x);
+        if ((temp_str1 * x > "2") || (temp_str1 * x < "-2")) {
+            std::cout << "\nDivision error\n";
+            std::cout << "Recomend increasing precision\n";
+            std::cout << "Operation in question: \"" << str0 << " / " << str1 << "\"\n\n";
+            exit(-1);
+        }
     } while (prev_x != x);
         
 
