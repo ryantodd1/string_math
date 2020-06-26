@@ -451,7 +451,7 @@ nstr operator*(const nstr &str0, const char *str1) {
 
 nstr operator-(const nstr &str0, const char *str1) {
     nstr temp_str1(str1);
-    return temp_str1 - str0;
+    return str0 - temp_str1;
 }
 
 nstr operator/(const nstr &str0, const char *str1) {
